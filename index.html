@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Aditya Singh, aspiring data analyst. SQL, Python and analytics projects.">
+<title>Aditya Singh Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script>(function(){var l=document.createElement('link');l.rel='stylesheet';l.href='https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Figtree:wght@400;500;600&display=swap';document.head.appendChild(l);})();</script>
+<style>
+/* Layout: dark editorial one-pager. Full-bleed hero with a drifting network behind a faded portrait, then ruled sections like a lab notebook. Single committed dark look. */
+:root{
+  --bg:#0b1220;        /* navy ground */
+  --bg2:#101a2c;       /* raised surface */
+  --fg:#e9edf5;        /* main text */
+  --muted:#8b97ad;     /* secondary text */
+  --line:#223049;      /* hairlines */
+  --accent:#3ddc97;    /* green accent, used sparingly */
+  --paper:#f3f5f9;     /* chart plates */
+  --display:"Instrument Serif","Times New Roman",serif;
+  --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0;overflow-x:hidden;
+}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.mono{font-family:var(--mono);text-transform:uppercase;letter-spacing:.14em;font-size:12px}
+.wrap{max-width:1180px;margin:0 auto}
+
+/* nav */
+nav{
+  position:fixed;z-index:30;left:50%;transform:translateX(-50%);
+  top:calc(14px + env(safe-area-inset-top,0px));
+  max-width:calc(100vw - 24px);
+  background:rgba(11,18,32,.94);
+  border:1px solid var(--line);border-radius:999px;padding:6px;
+  display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;
+}
+nav::-webkit-scrollbar{display:none}
+nav a{
+  text-decoration:none;color:var(--muted);padding:9px 14px;border-radius:999px;white-space:nowrap;
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+}
+nav a:hover{color:var(--fg)}
+nav a.on{background:#16233a;color:var(--fg)}
+
+/* hero */
+.hero{
+  position:relative;margin:0 calc(-1 * max(16px,env(safe-area-inset-left,0px)));
+  padding:110px max(16px,env(safe-area-inset-left,0px)) 40px;
+  min-height:780px;overflow:hidden;isolation:isolate;
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:60px;text-align:center;
+}
+#net{position:absolute;inset:0;width:100%;height:100%;z-index:-3}
+.portrait{
+  position:absolute;z-index:-2;left:50%;top:76px;transform:translateX(-50%);
+  height:min(640px,78%);width:auto;max-width:none;opacity:.92;
+  -webkit-mask-image:radial-gradient(ellipse 52% 56% at 50% 46%,#000 28%,transparent 88%);
+          mask-image:radial-gradient(ellipse 52% 56% at 50% 46%,#000 28%,transparent 88%);
+}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(11,18,32,.25),rgba(11,18,32,0) 40%,rgba(11,18,32,.85) 100%)}
+.eyebrow{color:#aab4c8;margin:18px 0 0;order:2}
+h1{order:1}.lede{order:3}.btns{order:4}
+h1{
+  font-family:var(--display);font-weight:400;text-transform:uppercase;margin:0;
+  font-size:clamp(64px,15vw,190px);line-height:.88;letter-spacing:-.01em;
+}
+h1 span{display:block}
+h1 .l2{color:#8b94a6}
+h1 .dot{display:inline-block;width:.1em;height:.1em;border-radius:50%;background:var(--accent);margin-left:.05em}
+.lede{max-width:34ch;margin:10px 0 26px;color:#c3cadb;font-size:clamp(16px,2.2vw,19px)}
+.btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.btn{
+  display:inline-flex;align-items:center;gap:12px;padding:14px 22px;border:1px solid var(--line);
+  text-decoration:none;font-weight:500;font-size:15px;background:rgba(11,18,32,.6)
+}
+.btn:hover{border-color:var(--fg)}
+.btn.go{background:var(--accent);border-color:var(--accent);color:#06251a;font-weight:600}
+.btn.go:hover{background:#5ae8ad}
+.corner{position:absolute;z-index:1;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.corner.tl{top:84px;left:max(20px,env(safe-area-inset-left,0px))}
+.corner.tr{top:84px;right:max(20px,env(safe-area-inset-right,0px));text-align:right;color:var(--fg)}
+.pulse{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent);margin-right:8px;vertical-align:middle}
+.corner.bl{bottom:28px;left:max(20px,env(safe-area-inset-left,0px));text-align:left}
+.corner.br{bottom:28px;right:max(20px,env(safe-area-inset-right,0px));text-align:right}
+.corner ul{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:6px;color:#aab4c8;letter-spacing:.06em;text-transform:none}
+.corner a{text-decoration:none;color:#aab4c8}
+.corner a:hover{color:var(--accent)}
+
+/* sections */
+section{padding:90px 0 0}
+.sec-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:44px;color:var(--muted)}
+.sec-head b{font-weight:500;color:var(--accent)}
+h2{font-family:var(--display);font-weight:400;font-size:clamp(44px,7vw,84px);line-height:.98;margin:0;text-wrap:balance}
+h2 em{font-style:normal;color:#7e889c}
+.approach{display:grid;grid-template-columns:1.1fr 1fr;gap:56px}
+.approach p{margin:0 0 18px;color:#bcc4d6;max-width:52ch}
+pre{
+  margin:26px 0;padding:6px 0 6px 20px;border-left:1px solid var(--line);font-family:var(--mono);font-size:13px;color:var(--fg);white-space:pre-wrap
+}
+pre .c{color:#5c6a82;display:block;font-size:11px;margin-bottom:6px}
+pre .k{color:var(--accent)}
+.tools{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:22px 0;margin-top:60px}
+.tools .row{display:flex;gap:26px;flex-wrap:wrap;font-family:var(--mono);font-size:13px;color:#aab4c8}
+
+/* projects */
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.card{border:1px solid var(--line);background:var(--bg2);display:flex;flex-direction:column;min-width:0}
+.card.wide{grid-column:1/-1;display:grid;grid-template-columns:1.25fr 1fr}
+.plate{background:var(--paper);padding:10px;display:flex;align-items:center;justify-content:center}
+.plate img{display:block;width:100%;height:auto;max-height:340px;object-fit:contain}
+.stat{background:linear-gradient(135deg,#0f2a2a,#10263a);display:flex;flex-direction:column;justify-content:center;gap:6px;padding:28px 24px;min-height:200px}
+.stat .big{font-family:var(--display);font-size:clamp(40px,5.5vw,64px);line-height:1;color:var(--accent)}
+.stat .cap{color:#9fb0c6;font-size:13px;font-family:var(--mono);letter-spacing:.06em}
+.body{padding:24px 24px 26px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.tags{display:flex;gap:8px;flex-wrap:wrap}
+.tag{border:1px solid var(--line);padding:3px 9px;color:var(--muted);font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase}
+.tag.real{color:var(--accent);border-color:#1f5a46}
+h3{font-family:var(--display);font-weight:400;font-size:30px;line-height:1.05;margin:4px 0 0}
+.card.wide h3{font-size:40px}
+.body p{margin:0;color:#bcc4d6;font-size:15px}
+.facts{margin:4px 0 0;padding:0;list-style:none;display:grid;gap:6px;color:#aab4c8;font-size:14px}
+.facts li{padding-left:16px;position:relative}
+.facts li::before{content:"";position:absolute;left:0;top:.7em;width:7px;height:1px;background:var(--accent)}
+.stack{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.more{margin-top:auto;padding-top:12px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--fg)}
+.more:hover{color:var(--accent)}
+
+/* certs */
+.certs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 56px;border-top:1px solid var(--line)}
+.cert{display:flex;justify-content:space-between;gap:20px;border-bottom:1px solid var(--line);padding:18px 0;min-width:0}
+.cert span:last-child{color:var(--muted);font-family:var(--mono);font-size:12px;white-space:nowrap}
+
+/* about */
+.about{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
+.about img{display:block;width:100%;height:auto;border:1px solid var(--line);filter:saturate(.95)}
+.about p{color:#bcc4d6;margin:18px 0 0;max-width:54ch}
+
+/* contact */
+.contact{margin-top:30px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 56px;border-top:1px solid var(--line)}
+.crow{display:flex;justify-content:space-between;align-items:center;gap:16px;border-bottom:1px solid var(--line);padding:18px 0;min-width:0}
+.crow .lbl{color:var(--muted)}
+.crow .val{font-size:17px;overflow-wrap:anywhere;text-align:right}
+.crow button{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:none;color:var(--muted);border:1px solid var(--line);padding:5px 10px;cursor:pointer;margin-left:12px}
+.crow button:hover{color:var(--fg);border-color:var(--fg)}
+footer{padding:70px 0 50px;color:var(--muted);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+@media (max-width:860px){
+  .approach,.about,.card.wide{grid-template-columns:1fr}
+  .approach,.about{gap:32px}
+  .grid,.certs,.contact{grid-template-columns:1fr}
+  .corner.bl,.corner.br{display:none}
+  .corner.tl{display:none}
+  .corner.tr{top:70px;left:50%;right:auto;transform:translateX(-50%);white-space:nowrap}
+  .hero{padding-top:130px;min-height:720px}.portrait{height:62%;top:90px}
+  section{padding-top:70px}
+}
+@media (prefers-reduced-motion:no-preference){
+  h1 span{animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
+  h1 .l2{animation-delay:.12s}
+  @keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+}
+/* v2: 3D, lively */
+.hero{min-height:100vh;align-items:stretch;justify-content:center;text-align:left;padding-top:96px;padding-bottom:70px}
+.hero::after{background:radial-gradient(60% 50% at 75% 45%,rgba(61,220,151,.10),transparent 70%),linear-gradient(180deg,rgba(11,18,32,0) 70%,var(--bg) 100%)}
+.hero-in{width:100%;max-width:1180px;margin:auto;display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.hero-text .lede{margin:22px 0 26px;max-width:36ch}
+.hero-text .btns{justify-content:flex-start}
+.eyebrow{display:flex;align-items:center}
+h1{font-size:clamp(64px,11vw,150px)}
+.links{display:flex;gap:22px;margin-top:26px;color:var(--muted)}
+.links a{text-decoration:none}.links a:hover{color:var(--accent)}
+.stage{perspective:1100px;display:flex;justify-content:center;padding:30px 20px}
+.card3d{position:relative;width:min(100%,380px);transform-style:preserve-3d;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .18s ease-out;}
+.frame{margin:0;position:relative;aspect-ratio:4/5;overflow:hidden;border:1px solid #2c4160;background:var(--bg2);box-shadow:0 40px 80px -20px rgba(0,0,0,.65),0 0 0 1px rgba(61,220,151,.08)}
+.frame img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 30%;filter:saturate(.85) contrast(1.04)}
+.frame::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,18,32,.05) 40%,rgba(11,18,32,.88) 100%),linear-gradient(135deg,rgba(26,60,110,.25),transparent 60%);pointer-events:none}
+.frame figcaption{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:18px 20px;display:flex;flex-direction:column;gap:4px}
+.frame figcaption b{font-family:var(--display);font-weight:400;font-size:28px;line-height:1}
+.frame figcaption span{color:var(--accent);font-size:11px}
+.shine{position:absolute;inset:0;z-index:1;background:radial-gradient(circle at var(--mx,50%) var(--my,30%),rgba(255,255,255,.18),transparent 45%);pointer-events:none}
+.ring{position:absolute;inset:-22px;border:1px dashed rgba(61,220,151,.45);border-radius:50%;transform:translateZ(-60px);animation:spin 40s linear infinite}
+.ring::before{content:"";position:absolute;top:8%;left:50%;width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 18px var(--accent)}
+.chip{position:absolute;z-index:3;padding:9px 15px;border:1px solid #2c4160;background:#101a2c;font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--fg);box-shadow:0 18px 30px -12px rgba(0,0,0,.7);white-space:nowrap}
+.c1{top:6%;left:-14%;transform:translateZ(90px)}
+.c2{top:22%;right:-12%;transform:translateZ(120px);color:var(--accent)}
+.c3{bottom:26%;left:-16%;transform:translateZ(110px)}
+.c4{bottom:12%;right:-10%;transform:translateZ(80px)}
+.c5{top:-4%;right:12%;transform:translateZ(60px)}
+.scrollcue{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);color:var(--muted);text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:8px;font-size:10px}
+.scrollcue i{width:1px;height:34px;background:linear-gradient(var(--accent),transparent)}
+.bar{position:fixed;z-index:40;left:0;top:env(safe-area-inset-top,0px);height:3px;width:100%;transform-origin:0 50%;transform:scaleX(var(--p,0));background:var(--accent)}
+.numbers{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-bottom:1px solid var(--line)}
+.num{padding:34px 20px 30px 22px;display:flex;flex-direction:column;gap:6px;border-right:1px solid var(--line)}
+.num:first-child{padding-left:0}.num:last-child{border-right:0}
+.num b{font-family:var(--display);font-weight:400;font-size:clamp(40px,6vw,72px);line-height:1}
+.num span{color:var(--muted);font-size:11px}
+.tilt{perspective:900px}
+.tilt img{border:1px solid var(--line);box-shadow:0 30px 60px -24px rgba(0,0,0,.7);transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .18s ease-out}
+.card[data-tilt]{transform:perspective(1000px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .2s ease-out,border-color .2s,box-shadow .2s,opacity .8s}
+.card[data-tilt]:hover{border-color:#2f6b57;box-shadow:0 30px 60px -28px rgba(0,0,0,.8),0 0 0 1px rgba(61,220,151,.18)}
+.plate img{transition:transform .5s ease}
+.card:hover .plate img{transform:scale(1.04)}
+html.js .rv{opacity:0;translate:0 34px;transition:opacity .8s cubic-bezier(.2,.7,.2,1),translate .8s cubic-bezier(.2,.7,.2,1),transform .2s ease-out,border-color .2s,box-shadow .2s;transition-delay:var(--d,0ms),var(--d,0ms),0s,0s,0s}
+html.js .rv.in{opacity:1;translate:0 0}
+@keyframes spin{to{transform:translateZ(-60px) rotate(360deg)}}
+@keyframes bob{0%,100%{translate:0 0}50%{translate:0 -12px}}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(61,220,151,.6)}70%,100%{box-shadow:0 0 0 10px rgba(61,220,151,0)}}
+@media (prefers-reduced-motion:no-preference){
+  
+  .c2{animation-delay:-1.2s}.c3{animation-delay:-2.4s}.c4{animation-delay:-3.4s}.c5{animation-delay:-.6s}
+  .pulse{animation:ping 2s infinite}
+  
+}
+@media (prefers-reduced-motion:reduce){
+  html.js .rv{opacity:1;translate:none;transition:none}
+  .ring{animation:none}
+}
+@media (max-width:860px){
+  .hero{min-height:0;padding-top:120px}
+  .hero-in{grid-template-columns:1fr;gap:30px}
+  .stage{padding:30px 26px}
+  .card3d{width:min(100%,320px)}
+  .c1,.c3{left:-8%}.c2,.c4{right:-6%}
+  .numbers{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .num:nth-child(2){border-right:0}
+  .num:nth-child(3){padding-left:0}
+  .num:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .scrollcue{display:none}
+}
+
+/* dashboard + resume */
+.dash{border:1px solid var(--line);background:var(--bg2);padding:26px;display:grid;gap:26px}
+.dtop{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.fc{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--line);background:none;color:var(--muted);padding:8px 12px;cursor:pointer}
+.fc:hover{color:var(--fg);border-color:#3a4f73}
+.fc[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#06251a;font-weight:600}
+.kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.kpi{background:var(--bg);padding:16px 16px 14px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.kpi b{font-family:var(--display);font-weight:400;font-size:clamp(26px,3.2vw,38px);line-height:1}
+.kpi span{color:var(--muted);font-size:10.5px}
+.dgrid{display:grid;grid-template-columns:1.5fr 1fr;gap:26px}
+.pane{min-width:0;display:flex;flex-direction:column;gap:14px}
+.pane h4{margin:0;font-weight:500;font-size:12px;color:var(--muted)}
+.pane h4 b{color:var(--fg);font-weight:500}
+.bars{display:flex;align-items:flex-end;gap:6px;height:230px;border-bottom:1px solid var(--line);position:relative}
+.col{flex:1;min-width:0;height:100%;display:flex;align-items:flex-end;position:relative;cursor:default}
+.col i{display:block;width:100%;background:#2f9e74;height:var(--h,0%);transition:height .7s cubic-bezier(.2,.7,.2,1),background .2s;transition-delay:var(--dl,0ms)}
+.col.pk i{background:var(--accent)}
+.col.part i{background:repeating-linear-gradient(45deg,#2f9e74 0 4px,#1b5a45 4px 8px)}
+.col:hover i{background:#7ff0c2}
+.col .tip{position:absolute;bottom:calc(var(--h,0%) + 8px);left:50%;transform:translateX(-50%);background:#06101f;border:1px solid var(--line);padding:5px 8px;font-family:var(--mono);font-size:11px;white-space:nowrap;opacity:0;pointer-events:none;z-index:3;transition:opacity .15s}
+.col:hover .tip,.col:focus-visible .tip{opacity:1}
+.col:nth-last-child(-n+3) .tip{left:auto;right:0;transform:none}
+.col:nth-child(-n+2) .tip{left:0;transform:none}
+.mlabels{display:flex;gap:6px;font-family:var(--mono);font-size:10px;color:var(--muted)}
+.mlabels span{flex:1;text-align:center;min-width:0;overflow:hidden}
+.hb{display:grid;gap:10px}
+.hr{display:grid;grid-template-columns:118px 1fr auto;gap:10px;align-items:center;font-size:13px;min-width:0}
+.hr .n{color:#c3cadb;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hr .t{height:10px;background:#0b1424;position:relative}
+.hr .t i{position:absolute;left:0;top:0;bottom:0;background:#2f9e74;width:var(--w,0%);transition:width .7s cubic-bezier(.2,.7,.2,1)}
+.hr .v{font-family:var(--mono);font-size:11px;color:var(--muted);text-align:right;white-space:nowrap}
+.insight{border-left:2px solid var(--accent);padding:2px 0 2px 14px;color:#c3cadb;font-size:15px;margin:0}
+.dnote{color:var(--muted);font-size:12px;margin:0}
+.resume-wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px;align-items:start}
+.resume-wrap p{color:#bcc4d6;max-width:44ch;margin:18px 0 22px}
+.rimg{border:1px solid var(--line);background:#fff;box-shadow:0 30px 60px -24px rgba(0,0,0,.7)}
+.rimg img{display:block;width:100%;height:auto}
+@media (max-width:860px){
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.kpi:last-child{grid-column:1/-1}
+  .dgrid,.resume-wrap{grid-template-columns:1fr}.resume-wrap{gap:30px}
+  .dash{padding:18px}.hr{grid-template-columns:96px 1fr auto}
+}
+</style>
+
+</head><body>
+<nav aria-label="Sections">
+  <a href="#intro" class="on">Intro</a>
+  <a href="#projects">Projects</a>
+  <a href="#certs">Certifications</a>
+  <a href="#about">About</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<header class="hero" id="intro">
+  <canvas id="net" aria-hidden="true"></canvas>
+  <div class="hero-in">
+    <div class="hero-text">
+      <p class="eyebrow mono"><span class="pulse"></span>Open to data analyst internships</p>
+      <h1><span>Aditya</span><span class="l2">Singh<i class="dot"></i></span></h1>
+      <p class="lede">Aspiring data analyst. I turn messy data into decisions, and explain them in plain language.</p>
+      <div class="btns">
+        <a class="btn go" href="#projects">Explore my work <span aria-hidden="true">↗</span></a>
+        <a class="btn" href="https://www.linkedin.com/in/aditya-singh-5429b0308" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="links mono"><a href="https://github.com/singhji777" target="_blank" rel="noopener">GitHub ↗</a><a href="https://www.linkedin.com/in/aditya-singh-5429b0308" target="_blank" rel="noopener">LinkedIn ↗</a></div>
+    </div>
+    <div class="stage" id="stage">
+      <div class="card3d" id="card3d">
+        <div class="ring" aria-hidden="true"></div>
+        <figure class="frame">
+          <img src="card.jpg" alt="Aditya Singh in a red jacket and sunglasses on a motorbike on a mountain road">
+          <div class="shine" aria-hidden="true"></div>
+          <figcaption><b>Aditya Singh</b><span class="mono">Data analyst in the making</span></figcaption>
+        </figure>
+        <span class="chip c1">SQL</span>
+        <span class="chip c2">Python</span>
+        <span class="chip c3">Power BI</span>
+        <span class="chip c4">A/B tests</span>
+        <span class="chip c5">Forecasting</span>
+      </div>
+    </div>
+  </div>
+  <a class="scrollcue mono" href="#numbers" aria-label="Scroll down">Scroll <i></i></a>
+</header>
+
+<div class="bar" id="bar" aria-hidden="true"></div>
+<script>document.documentElement.classList.add('js')</script>
+
+<div class="wrap numbers" id="numbers">
+  <div class="num rv"><b data-to="7">0</b><span class="mono">Projects shipped</span></div>
+  <div class="num rv"><b data-to="541909">0</b><span class="mono">Real sales rows analysed</span></div>
+  <div class="num rv"><b data-to="22">0</b><span class="mono">SQL queries written</span></div>
+  <div class="num rv"><b data-to="6">0</b><span class="mono">Certs &amp; simulations</span></div>
+</div>
+
+<main class="wrap">
+
+<section id="approach">
+  <div class="sec-head mono rv"><span>The approach</span><b>+</b></div>
+  <div class="approach rv">
+    <h2>Good data.<br><em>Better decisions.</em></h2>
+    <div>
+      <p>I'm Aditya, a B.Tech computer science student who likes the part of analysis where a number changes what someone decides.</p>
+      <p>I check the data before I trust it, test my results against a simple baseline, and say clearly where they stop holding. The best way I know to learn something is to build it, and the next best is to explain it.</p>
+      <pre><span class="c">// the short version</span><span class="k">while</span> (curious) { query(); test(); explain(); }</pre>
+      <a class="more" href="#about">A little more about me ↗</a>
+    </div>
+  </div>
+  <div class="tools" id="toolkit">
+    <span class="mono" style="color:var(--muted)">My everyday toolkit</span>
+    <div class="row"><span>SQL</span><span>Python</span><span>pandas</span><span>scikit-learn</span><span>statsmodels</span><span>Power BI</span><span>Excel</span></div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="sec-head mono rv"><span>Selected projects</span><b>7</b></div>
+  <div class="grid">
+
+    <article data-tilt class="rv card wide">
+      <div class="plate"><img src="img-telco.jpg" alt="Chart of expected profit against how many customers are contacted" loading="lazy"></div>
+      <div class="body">
+        <div class="tags"><span class="tag real">Public dataset</span><span class="tag">Churn</span></div>
+        <h3>Telco Customer Churn and Retention ROI</h3>
+        <p>Predicting who will leave is half the job. This project decides who to contact by expected profit, and shows where the campaign stops paying off.</p>
+        <ul class="facts">
+          <li>Targeting by expected profit earns about USD 2,500 more per 1,000 customers than the best simple rule (95% range 1,589 to 3,487).</li>
+          <li>Month-to-month customers are 55% of the base but 89% of those who leave.</li>
+          <li>Model scores ROC-AUC 0.84 on 7,043 customers.</li>
+        </ul>
+        <div class="stack">Python · scikit-learn · statsmodels</div>
+        <a class="more" href="https://github.com/singhji777/telco-churn-prediction-roi" target="_blank" rel="noopener">View on GitHub ↗</a>
+      </div>
+    </article>
+
+    <article data-tilt class="rv card">
+      <div class="plate"><img src="img-fakenews.jpg" alt="Screenshot of Rumour Desk, the web app that checks a tweet for fake news" loading="lazy"></div>
+      <div class="body">
+        <div class="tags"><span class="tag real">Public dataset</span><span class="tag">Group project</span></div>
+        <h3>Fake News Detection on Twitter</h3>
+        <p>A model that reads tweet text, who shares a tweet and how it spreads. It trains in 1 to 2 minutes on a CPU.</p>
+        <ul class="facts">
+          <li>Beat fine-tuned DeBERTa-v3 and TEG-FND in all 12 test settings, by 13 to 24 points.</li>
+          <li>Found about 15% of test tweets have near-duplicates in the training data.</li>
+        </ul>
+        <div class="stack">Python · PyTorch · scikit-learn</div>
+        <a class="more" href="https://rumour-desk.onrender.com" target="_blank" rel="noopener">Try the live web app ↗</a>
+        <a class="more" style="padding-top:0" href="https://github.com/singhji777/fakeNewsDetection" target="_blank" rel="noopener">View on GitHub ↗</a>
+        <span class="stack">Group project repo · <a href="https://github.com/Ayush1388/fakeNewsDetection" target="_blank" rel="noopener" style="text-decoration:underline">original</a></span>
+      </div>
+    </article>
+
+    <article data-tilt class="rv card">
+      <div class="plate"><img src="img-ecom.jpg" alt="Heatmap of customer retention by signup month" loading="lazy"></div>
+      <div class="body">
+        <div class="tags"><span class="tag real">Real data</span><span class="tag">SQL</span></div>
+        <h3>E-commerce Customer Analytics</h3>
+        <p>541,909 real sales records from a UK wholesaler, analysed with 12 SQL queries.</p>
+        <ul class="facts">
+          <li>The top 10% of customers bring 60% of revenue; 35% buy only once.</li>
+          <li>A complex prediction model was no better than ranking by past spend (both 66%), so I recommended the simple one.</li>
+        </ul>
+        <div class="stack">SQL · Python · Power BI-ready export</div>
+        <a class="more" href="https://github.com/singhji777/ecommerce-customer-analytics" target="_blank" rel="noopener">View on GitHub ↗</a>
+      </div>
+    </article>
+
+    <article data-tilt class="rv card">
+      <div class="plate"><img src="img-forecast.jpg" alt="Daily sales series with weekday pattern" loading="lazy"></div>
+      <div class="body">
+        <div class="tags"><span class="tag real">Real data</span><span class="tag">Forecasting</span></div>
+        <h3>Sales Forecasting with Backtesting</h3>
+        <p>Six forecasting methods tested over 13 time periods on real daily sales.</p>
+        <ul class="facts">
+          <li>A simple method (30.9% error) beat naive guessing (42.7%) and matched an advanced one.</li>
+          <li>Forecasts ran about 16% too low from August; 80% ranges held true 81% of the time.</li>
+        </ul>
+        <div class="stack">Python · statsmodels</div>
+        <a class="more" href="https://github.com/singhji777/sales-forecasting-backtesting" target="_blank" rel="noopener">View on GitHub ↗</a>
+      </div>
+    </article>
+
+    <article data-tilt class="rv card">
+      <div class="plate"><img src="img-ab.jpg" alt="Forest plot of conversion lift by segment" loading="lazy"></div>
+      <div class="body">
+        <div class="tags"><span class="tag">Sample data</span><span class="tag">A/B test</span></div>
+        <h3>A/B Test: Checkout Redesign</h3>
+        <p>A new checkout raised purchases from 10.29% to 11.55% (p &lt; 0.001) with no drop in order value.</p>
+        <ul class="facts"><li>The gain came from mobile users, so I recommended a mobile-first launch.</li></ul>
+        <div class="stack">Python · SciPy · statsmodels</div>
+        <a class="more" href="https://github.com/singhji777/ab-test-checkout-redesign" target="_blank" rel="noopener">View on GitHub ↗</a>
+      </div>
+    </article>
+
+    <article data-tilt class="rv card">
+      <div class="plate"><img src="img-retail.jpg" alt="Heatmap of profit margin by category and discount" loading="lazy"></div>
+      <div class="body">
+        <div class="tags"><span class="tag">Sample data</span><span class="tag">Segmentation</span></div>
+        <h3>Retail Sales and Customer Segmentation</h3>
+        <p>Electronics gives 65% of revenue but only a 9.3% margin, and 99% of loss-making sales carried a discount of 20% or more.</p>
+        <div class="stack">Python · pandas · seaborn</div>
+        <a class="more" href="https://github.com/singhji777/retail-sales-rfm-analysis" target="_blank" rel="noopener">View on GitHub ↗</a>
+      </div>
+    </article>
+
+    <article data-tilt class="rv card">
+      <div class="plate"><img src="img-food.jpg" alt="Heatmap of repeat ordering by signup cohort" loading="lazy"></div>
+      <div class="body">
+        <div class="tags"><span class="tag">Sample data</span><span class="tag">SQL</span></div>
+        <h3>Food Delivery SQL Analytics</h3>
+        <p>Ten SQL queries. Peak hours carry 48% of orders with deliveries about 7 minutes slower, and referral customers are worth Rs 3,108 against Rs 1,659 for influencer-acquired ones.</p>
+        <div class="stack">SQL (SQLite)</div>
+        <a class="more" href="https://github.com/singhji777/food-delivery-sql-analytics" target="_blank" rel="noopener">View on GitHub ↗</a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section id="certs">
+  <div class="sec-head mono rv"><span>Certifications &amp; training</span><b>+</b></div>
+  <div class="certs">
+    <div class="cert rv"><span>Microsoft Power BI Data Analyst (PL-300) course</span><span>2026</span></div>
+    <div class="cert rv"><span>Microsoft Azure AI Fundamentals (AI-900)</span><span>2026</span></div>
+    <div class="cert rv"><span>AWS AI-Powered Cloud Engineer, virtual internship</span><span>2026</span></div>
+    <div class="cert rv"><span>AICTE-EduSkills AI in Cyber Security, virtual internship</span><span>2026</span></div>
+    <div class="cert rv"><span>Deloitte Data Analytics, job simulation</span><span>Simulation</span></div>
+    <div class="cert rv"><span>Mastercard Advisors &amp; Consulting, job simulation</span><span>Simulation</span></div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="sec-head mono rv"><span>About</span><b>+</b></div>
+  <div class="about">
+    <div class="tilt" data-tilt><img src="hero.jpg" alt="Aditya Singh outdoors in a red jacket with mountains behind him" loading="lazy"></div>
+    <div>
+      <h2>Curious first.<br><em>Careful second.</em></h2>
+      <p>I study B.Tech Computer Science and Engineering at SRM Institute of Science and Technology (2024 to 2028). I did a one-month data analytics internship at Oasis Infobyte and completed virtual internships with AWS and AICTE-EduSkills.</p>
+      <p>I'm looking for a data analyst internship where I can work on real questions and learn from people who ask good ones.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="sec-head mono rv"><span>Let's talk</span><b>+</b></div>
+  <h2>Hiring for a data role?<br><em>Say hello.</em></h2>
+  <div class="contact">
+    <div class="crow rv"><span class="lbl mono">Email</span><span class="val"><span id="mail">adityasingh11may@gmail.com</span><button type="button" data-copy="mail">Copy</button></span></div>
+    <div class="crow rv"><span class="lbl mono">Phone</span><span class="val"><span id="tel">+91 9110040511</span><button type="button" data-copy="tel">Copy</button></span></div>
+    <div class="crow rv"><span class="lbl mono">LinkedIn</span><a class="val" href="https://www.linkedin.com/in/aditya-singh-5429b0308" target="_blank" rel="noopener">aditya-singh ↗</a></div>
+    <div class="crow rv"><span class="lbl mono">GitHub</span><a class="val" href="https://github.com/singhji777" target="_blank" rel="noopener">singhji777 ↗</a></div>
+  </div>
+  <footer class="mono"><span>Aditya Singh</span><span>Delhi, India</span></footer>
+</section>
+
+</main>
+
+<script>
+/* drifting network behind the hero */
+(function(){
+  var c=document.getElementById('net'),x=c.getContext('2d'),W,H,dpr=1,N=[],still=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function size(){var r=c.getBoundingClientRect();W=r.width;H=r.height;c.width=W*dpr;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0);
+    var n=Math.round(Math.min(70,Math.max(26,W/20)));N=[];
+    for(var i=0;i<n;i++)N.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25,r:2+Math.random()*4});}
+  function draw(){
+    x.clearRect(0,0,W,H);var L=Math.min(190,W/5);
+    for(var i=0;i<N.length;i++){var a=N[i];
+      for(var j=i+1;j<N.length;j++){var b=N[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);
+        if(d<L){x.strokeStyle='rgba(98,214,166,'+(0.34*(1-d/L)).toFixed(3)+')';x.lineWidth=1.4;x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke();}}
+    }
+    for(var k=0;k<N.length;k++){var p=N[k];x.fillStyle='rgba(110,200,170,.42)';x.beginPath();x.arc(p.x,p.y,p.r,0,6.283);x.fill();}
+  }
+  var vis=true,run=false;
+  function step(){
+    if(!vis||document.hidden){run=false;return;}
+    for(var i=0;i<N.length;i++){var p=N[i];p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;}
+    draw();requestAnimationFrame(step);
+  }
+  function go(){if(!run&&!still){run=true;requestAnimationFrame(step);}}
+  size();draw();
+  if('IntersectionObserver' in window)new IntersectionObserver(function(e){vis=e[0].isIntersecting;if(vis)go();}).observe(c);
+  document.addEventListener('visibilitychange',go);
+  go();
+  window.addEventListener('resize',function(){size();draw();});
+})();
+
+/* active nav link */
+(function(){
+  var links=[].slice.call(document.querySelectorAll('nav a'));
+  var ids=links.map(function(a){return a.getAttribute('href').slice(1)});
+  function on(){
+    var y=window.scrollY+160,cur=ids[0];
+    ids.forEach(function(id){var e=document.getElementById(id);if(e&&e.offsetTop<=y)cur=id;});
+    links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+cur);});
+  }
+  window.addEventListener('scroll',on,{passive:true});on();
+})();
+
+/* copy buttons */
+[].forEach.call(document.querySelectorAll('button[data-copy]'),function(b){
+  b.addEventListener('click',function(){
+    var el=document.getElementById(b.getAttribute('data-copy')),t=el.textContent;
+    function sel(){var r=document.createRange();r.selectNodeContents(el);var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected';}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1500)},sel);}else sel();
+  });
+});
+(function(){
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine=matchMedia('(hover: hover) and (pointer: fine)').matches;
+  function tilt(el,max,target){
+    target=target||el;
+    el.addEventListener('pointermove',function(e){
+      if(e.pointerType==='touch')return;
+      var r=el.getBoundingClientRect(),px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
+      target.style.setProperty('--ry',((px-.5)*2*max).toFixed(2)+'deg');
+      target.style.setProperty('--rx',((.5-py)*2*max).toFixed(2)+'deg');
+      target.style.setProperty('--mx',(px*100)+'%');target.style.setProperty('--my',(py*100)+'%');
+    });
+    el.addEventListener('pointerleave',function(){target.style.setProperty('--ry','0deg');target.style.setProperty('--rx','0deg');});
+  }
+  var stage=document.getElementById('stage'),card=document.getElementById('card3d');
+  if(!reduce){
+    if(fine){tilt(stage,16,card);
+      [].forEach.call(document.querySelectorAll('[data-tilt]'),function(el){
+        if(el.classList.contains('tilt'))tilt(el,9,el.querySelector('img'));else tilt(el,4);});
+    }else{
+      var t0=performance.now();(function sway(t){var k=(t-t0)/1000;
+        card.style.setProperty('--ry',(Math.sin(k*.9)*10).toFixed(2)+'deg');
+        card.style.setProperty('--rx',(Math.cos(k*.7)*5).toFixed(2)+'deg');
+        card.style.setProperty('--mx',(50+Math.sin(k*.9)*30)+'%');
+        requestAnimationFrame(sway);})(t0);
+    }
+    var h1=document.querySelector('#intro h1');
+    var tk=false;addEventListener('scroll',function(){if(tk)return;tk=true;requestAnimationFrame(function(){tk=false;var y=Math.min(scrollY,700);
+      h1.style.transform='translateY('+(y*.12)+'px)';stage.style.transform='translateY('+(y*-.08)+'px)';});},{passive:true});
+  }
+  var bar=document.getElementById('bar');
+  function prog(){var d=document.documentElement.scrollHeight-innerHeight;bar.style.setProperty('--p',d>0?Math.min(1,scrollY/d):0);}
+  addEventListener('scroll',prog,{passive:true});prog();
+  var rv=[].slice.call(document.querySelectorAll('.rv'));
+  rv.forEach(function(e){var i=e.parentElement?[].indexOf.call(e.parentElement.children,e):0;e.style.setProperty('--d',(i%4*90)+'ms');});
+  [].forEach.call(document.querySelectorAll('.num b'),function(b){b.textContent=(+b.dataset.to).toLocaleString('en-IN');});
+  function count(el){
+    if(reduce)return;
+    var to=+el.dataset.to,t0=performance.now();
+    (function f(t){var p=Math.min(1,(t-t0)/1400),e=1-Math.pow(1-p,3);el.textContent=Math.round(to*e).toLocaleString('en-IN');if(p<1)requestAnimationFrame(f);})(t0);
+  }
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){
+      en.target.classList.add('in');if(en.target.classList.contains('num'))count(en.target.querySelector('b'));io.unobserve(en.target);}});},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+    rv.forEach(function(e){io.observe(e);});
+  }else rv.forEach(function(e){e.classList.add('in');});
+})();
+
+</script>
+
+
+</body></html>
